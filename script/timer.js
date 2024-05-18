@@ -1,5 +1,4 @@
-import { workoutScreen } from "./main.js";
-import { setImage, setExerciseName } from "./image.js";
+export {Begin, secondsElapsed}
 
 let secondsElapsed = 0;
 let interval = null;
@@ -7,8 +6,19 @@ const time = document.querySelector("time")
 
 const padStart = (value) => String(value).padStart(2, "0");
 
+const homeScreen = document.querySelector(".home")
+const workoutScreen = document.querySelector(".workout")
+const begin = document.querySelector(".begin")
 
-function setTime() {
+function Begin(){
+    begin.addEventListener("click", () => {
+        homeScreen.style.display = "none"
+        workoutScreen.style.display = "block"
+        StartClock()
+    })
+}
+
+function SetTime() {
     const minutes = Math.floor(secondsElapsed / 60)
     const seconds = secondsElapsed % 60
     workoutScreen.querySelector(
@@ -16,26 +26,24 @@ function setTime() {
     ).textContent = `${padStart(minutes)}:${padStart(seconds)}`;
 }
 
-function timer() {
+function Timer() {
     secondsElapsed++;
-    setTime()
-    setImage()
-    setExerciseName()
+    SetTime()
 }
 
-export function startClock() {
-    if (interval) stopClock()
-    interval = setInterval(timer, 1000)
+export function StartClock() {
+    if (interval) StopClock()
+    interval = setInterval(Timer, 1000)
 }
 
-function stopClock() {
+function StopClock() {
     clearInterval(interval)
 }
 
-function resetClock() {
-    stopClock()
+function ResetClock() {
+    StopClock()
     secondsElapsed = 0;
-    setTime()
+    SetTime()
 }
 
 
@@ -43,6 +51,6 @@ const start = document.querySelector(".start")
 const stop = document.querySelector(".stop")
 const reset = document.querySelector(".reset")
 
-start.addEventListener("click", () => startClock())
-stop.addEventListener("click", () => stopClock())
-reset.addEventListener("click", () => resetClock())
+start.addEventListener("click", () => StartClock())
+stop.addEventListener("click", () => StopClock())
+reset.addEventListener("click", () => ResetClock())

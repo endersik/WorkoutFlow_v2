@@ -1,16 +1,17 @@
-import { startClock } from './timer.js';
-export {workoutScreen};
+import { Begin, secondsElapsed } from './timer.js';
+import { SetImage, SetImgName } from './setImg.js';
+import { ControlTransition, isExercise } from './transition.js';
+
+Begin()
+
+ControlTransition(secondsElapsed)
+
+SetImage(isExercise)
+SetImgName(isExercise)
 
 
 
-const homeScreen = document.querySelector(".home")
-const workoutScreen = document.querySelector(".workout")
-const begin = document.querySelector(".begin")
 
-begin.addEventListener("click", () => {
-    homeScreen.style.display = "none"
-    workoutScreen.style.display = "block"
-    startClock()
-})
+
 
 
